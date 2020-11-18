@@ -40,6 +40,7 @@
 #include "serial.h"
 #include "eeprom_driver.h"
 #include "sp_driver.h"
+#include "clock.h"
 
 #define COMMAND_CHECK_AUTOINC      'a'
 #define COMMAND_SET_ADDRESS        'A'

@@ -94,6 +94,8 @@ MCU = atxmega16d4
 # Specify which UART to use with PORT,NUM notation. For example, UART1 on
 # PORTD would be D,1.
   UART = C,0
+# Set up PLL driven by internal 2MHz oscillator using 32kHz DFLL reference
+# CLOCK_PLL = y
 
 ###############################################################################
 # End user modification section
@@ -353,6 +355,10 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 ## Objects that must be built in order to link
 OBJECTS = eeprom_driver.o $(PROJECT).o serial.o sp_driver.o CCP_Write.o
+ifeq ($(CLOCK_PLL), y)
+    OBJECTS += clock.o
+    CFLAGS  += -DCLOCK_PLL
+endif
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS =
@@ -365,6 +371,9 @@ eeprom_driver.o: eeprom_driver.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 $(PROJECT).o: $(PROJECT).c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+clock.o: clock.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 serial.o: serial.c

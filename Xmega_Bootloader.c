@@ -62,7 +62,9 @@ int main(void)
     #else
         #error Invalid value for LED_ON
     #endif
-
+        #ifdef CLOCK_PLL
+            initclock();                                      // Initalise the clock
+        #endif
         initbootuart();                                       // Initialize UART.
 
         for(;;) {
