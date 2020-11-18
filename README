@@ -83,6 +83,10 @@ MCU = atxmega64a3u
 # PORTD would be D,1.
   UART = C,0
 
+# Set up PLL driven by internal 2MHz oscillator using 32kHz DFLL reference.
+# Uncomment to enable
+# CLOCK_PLL = y
+
 ###############################################################################
 # End user modification section
 ###############################################################################
